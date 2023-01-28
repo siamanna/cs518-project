@@ -1,0 +1,7 @@
+
+If your last commit broke something after a merge:
+
+	git bisect start          # starts the bisecting session
+	git bisect bad            # marks the current revision as bad
+ 	git bisect good revision  # marks the last known good revision
+
