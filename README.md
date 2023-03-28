@@ -6,3 +6,6 @@ Lab report 2:
 
 **Read Record** Azure Function:
 [dataservice1234.azurewebsites.net/api/ReadRecord](https://dataservice1234.azurewebsites.net/api/ReadRecord)
+
+DataBase:
+[cloud.mongodb.com/v2/6422315b2dad1326c5b2a94c#/clusters](https://cloud.mongodb.com/v2/6422315b2dad1326c5b2a94c#/clusters)
