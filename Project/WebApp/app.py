@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 import requests
 import json
+import os
+
 
 
 username = "cs518"
@@ -15,9 +17,12 @@ headers = {
     "Authorization": f"Bearer {auth_token}"
 }
 
+# define a route for the root URL '/'
+app = Flask(__name__, template_folder='templates')
 
-app = Flask(__name__, template_folder='/templates')
-
+@app.route('/')
+def home():
+    return 'Welcome to my Flask App!'
 
 @app.route('/records')  # create a new route for /records endpoint
 def records():
@@ -31,3 +36,9 @@ def records():
     # render the records.html template and pass in the records list as a variable
     return render_template('records.html', records=records_dict)
 
+def main():
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+
+if __name__ == '__main__':
+    main()
