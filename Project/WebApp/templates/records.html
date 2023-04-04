@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <title>Records</title>
   </head>
@@ -10,7 +10,7 @@
         <tr>
           {% for key in records[0].keys() if key != '_id' and key != '_jd' %}
             <th>{{ key }}</th>
-          {% endfor %}
+          {% end-for %}
         </tr>
       </thead>
       <tbody>
@@ -18,9 +18,9 @@
           <tr>
             {% for key, value in record.items() if key != '_id' and key != '_jd' %}
               <td>{{ value }}</td>
-            {% endfor %}
+            {% end-for %}
           </tr>
-        {% endfor %}
+        {% end-for %}
       </tbody>
     </table>
   </body>
