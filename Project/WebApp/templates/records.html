@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Records</title>
+  </head>
+  <body>
+    <h1>Records</h1>
+    <table>
+      <thead>
+        <tr>
+          {% for key in records[0].keys() if key != '_id' and key != '_jd' %}
+            <th>{{ key }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in records %}
+          <tr>
+            {% for key, value in record.items() if key != '_id' and key != '_jd' %}
+              <td>{{ value }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
