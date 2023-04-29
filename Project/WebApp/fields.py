@@ -1,1 +1,2 @@
-fields = ['bookId', 'title', 'series', 'author', 'rating', 'language', 'isbn', 'genres', 'characters', 'publisher', 'setting', 'cover', 'likedPercentage']
+fields = ['title', 'author', 'edition', 'rating', 'language', 'isbn', 'genres', 'publisher', 'pages', 'setting', 'characters', 'bookformat', 'description', 'publishdate']
+length = {'title': 45, 'author': 45, 'edition': 15, 'rating': 45, 'language': 45, 'isbn': 45, 'genres': 45, 'publisher': 15, 'pages': 45, 'setting': 20, 'characters': 45, 'bookformat': 45, 'description': 45, 'publishdate': 45 }

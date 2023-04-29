@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from fields import fields
+from fields import fields, length
 import requests
 import json
 import os
@@ -32,18 +32,27 @@ def records():
 
     # parse the JSON response into a Python list of dictionaries
     records_list = json.loads(response.content)
-    new_records_list_filtered = []
+    records = []
 
     for d in records_list:
+        num_fields = 0
         new_dict = {}
         for k, v in d.items():
             if k.lower() in fields:
+                if (v != 'sdf' and v != ''):
+                    num_fields = num_fields + 1
+                max = length[k.lower()]
+                v = v.replace('[', '').replace(']', '').replace('\'', '')
+                if k.lower() == 'description':
+                    v = v.lower()
+                v = v[:max] + '...' if len(v) > max else v
                 new_dict[k.lower()] = v
-        if any(f.lower() in new_dict.keys() for f in fields):
-            new_records_list_filtered.append(new_dict)
+        if new_dict:
+            if num_fields > 8:
+                records.append(new_dict)
 
     # render the records.html template and pass in the records list as a variable
-    return render_template('records.html', records=new_records_list_filtered, fields=fields)
+    return render_template('records.html', records=records, fields=fields)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -55,8 +64,46 @@ def create():
             return redirect(url_for('records'))
     return render_template('create.html', fields=fields)
 
-@app.route('/delete', methods=['GET', 'POST', 'DELETE'])
+
+@app.route('/search', methods=['GET', 'POST'])  # create a new route for /records endpoint
+def search():
+    if request.method == 'GET':
+        return render_template('search.html', fields=fields)
+        
+    data = request.form.to_dict()
+    
+    search_q = {}
+    for k, v in data.items():
+        if v != '':
+            search_q[k] = v
+    
+    # send a GET request to read record API
+    response = requests.get(read_url, params=search_q)
+
+    # parse the JSON response into a Python list of dictionaries
+    records_list = json.loads(response.content)
+    records = []
+
+    for d in records_list:
+        num_fields = 0
+        new_dict = {}
+        for k, v in d.items():
+            if k.lower() in fields:
+                if (v != 'sdf' and v != ''):
+                    num_fields = num_fields + 1
+                v = v.replace('[', '').replace(']', '').replace('\'', '')
+                v = v[:45] + '...' if len(v) > 45 else v
+                new_dict[k.lower()] = v
+        if new_dict:
+            if num_fields > 8:
+                records.append(new_dict)
+                
+    # render the records.html template and pass in the records list as a variable
+    return render_template('records.html', records=records, fields=fields)
+
+@app.route('/delete', methods=['GET', 'DELETE'])
 def delete():
+    print(request.method)
     if request.method == 'DELETE':
         data = request.form.to_dict()
         data = json.dumps(data)

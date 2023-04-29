@@ -75,7 +75,7 @@
     <div class="container">
         <h1>Delete Record</h1>
         <p><a href="{{ url_for('index') }}">Index</a> &gt; Delete Record</p>
-        <form method="post" onsubmit="return validateForm();">
+        <form method="delete" onsubmit="return validateForm();">
             {% for field in fields %}
                 <label for="{{ field.lower() }}">{{ field }}:</label>
                 <input id="{{ field.lower() }}" name="{{ field.lower() }}">
