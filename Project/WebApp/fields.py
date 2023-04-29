@@ -1,0 +1,1 @@
+fields = ['title', 'author', 'date', 'genre', 'keywords']

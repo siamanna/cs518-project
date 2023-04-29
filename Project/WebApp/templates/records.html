@@ -49,16 +49,20 @@
     <table>
         <thead>
             <tr>
-                {% for key in records[0].keys() if key != '_id' and key != '_jd' %}
+                {% for key in fields%}
                     <th>{{ key }}</th>
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
-            {% for record in records %}
+           {% for record in records %}
                 <tr>
-                    {% for key, value in record.items() if key != '_id' and key != '_jd' %}
-                        <td>{{ value }}</td>
+                    {% for key in fields%}
+                        {% if key.lower() in record%}
+                            <td>{{ record[key.lower()] }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             {% endfor %}

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
+from fields import fields
 import requests
 import json
 import os
@@ -30,11 +31,19 @@ def records():
     response = requests.get(read_url, params=search_query)
 
     # parse the JSON response into a Python list of dictionaries
-    records_dict = json.loads(response.content)
-    # records_dict = {"test": "test"}
+    records_list = json.loads(response.content)
+    new_records_list_filtered = []
+
+    for d in records_list:
+        new_dict = {}
+        for k, v in d.items():
+            if k.lower() in fields:
+                new_dict[k.lower()] = v
+        if any(f.lower() in new_dict.keys() for f in fields):
+            new_records_list_filtered.append(new_dict)
 
     # render the records.html template and pass in the records list as a variable
-    return render_template('records.html', records=records_dict)
+    return render_template('records.html', records=new_records_list_filtered, fields=fields)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -44,7 +53,7 @@ def create():
         response = requests.post(create_url, headers=headers, data=data)
         if response.status_code == 200:
             return redirect(url_for('records'))
-    return render_template('create.html')
+    return render_template('create.html', fields=fields)
 
 @app.route('/delete', methods=['GET', 'POST', 'DELETE'])
 def delete():
@@ -54,7 +63,7 @@ def delete():
         response = requests.delete(delete_url, headers=headers, data=data)
         if response.status_code == 200:
             return redirect(url_for('records'))
-    return render_template('delete.html')
+    return render_template('delete.html', fields=fields)
 
 def main():
     port = int(os.environ.get('PORT', 5000))

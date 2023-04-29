@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Welcome!</title>
+	<title>LibraryCatalog&trade; Home</title>
 	<style>
 		body {
 			margin: 0;
@@ -49,10 +49,11 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Welcome!</h1>
+		<h1>LibraryCatalog&trade; Home</h1>
 		<ul>
-			<li><a href="{{ url_for('records') }}">View records</a></li>
-			<li><a href="{{ url_for('create') }}">Create record</a></li>
+			<li><a href="{{ url_for('records') }}">View Collection</a></li>
+			<li><a href="{{ url_for('create') }}">Create new record</a></li>
+            <li><a href="{{ url_for('delete') }}">Delete record</a></li>
 			<!-- Add more links here as needed -->
 		</ul>
 	</div>
