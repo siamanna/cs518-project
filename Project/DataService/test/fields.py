@@ -1,0 +1,1 @@
+fields = ['bookId', 'title', 'series', 'author', 'rating', 'language', 'isbn', 'genres', 'characters', 'publisher', 'setting', 'cover', 'likedPercentage']
