@@ -6,7 +6,7 @@ import os
 
 create_url = "https://dataservice12345.azurewebsites.net/api/CreateRecord"
 read_url = "https://dataservice12345.azurewebsites.net/api/ReadRecord"
-read_url = "https://dataservice12345.azurewebsites.net/api/DeleteRecord"
+delete_url = "https://dataservice12345.azurewebsites.net/api/DeleteRecord"
 search_query = {}
 
 
@@ -47,11 +47,11 @@ def create():
     return render_template('create.html')
 
 @app.route('/delete', methods=['GET', 'POST', 'DELETE'])
-def create():
+def delete():
     if request.method == 'DELETE':
         data = request.form.to_dict()
         data = json.dumps(data)
-        response = requests.delete(create_url, headers=headers, data=data)
+        response = requests.delete(delete_url, headers=headers, data=data)
         if response.status_code == 200:
             return redirect(url_for('records'))
     return render_template('delete.html')

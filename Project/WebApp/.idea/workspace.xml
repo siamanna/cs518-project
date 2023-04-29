@@ -65,7 +65,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable",
+    "settings.editor.selected.configurable": "preferences.general",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -116,7 +116,7 @@
       <workItem from="1681246894189" duration="661000" />
       <workItem from="1681248989291" duration="1206000" />
       <workItem from="1682519420850" duration="1034000" />
-      <workItem from="1682780861860" duration="1658000" />
+      <workItem from="1682780861860" duration="2292000" />
     </task>
     <servers />
   </component>
