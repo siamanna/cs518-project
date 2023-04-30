@@ -75,7 +75,7 @@
     <div class="container">
         <h1><br><br><br><br><br><br><br>Search Catalog</h1>
         <div>
-            <button onclick="location.href='index'">Home</button>
+            <button onclick="location.href='index'">home</button>
             <button onclick="location.href='search'">Search</button>
             <button onclick="location.href='create'">Create Record</button>
             <button onclick="location.href='delete'">Delete Record</button>
@@ -83,8 +83,10 @@
         </div>
         <form method="post" onsubmit="return validateForm();">
             {% for field in fields %}
-                <label for="{{ field.lower() }}">{{ field }}:</label>
-                <input id="{{ field.lower() }}" name="{{ field.lower() }}">
+                {% if field != 'coverimg' and field != 'publishdate'%}
+                    <label for="{{ field.lower() }}">{{ display[field.lower()].title() }}:</label>
+                    <input id="{{ field.lower() }}" name="{{ field.lower() }}">
+                {% endif %}
             {% endfor %}
             <button class="button_submit"; type="submit">Submit</button>
         </form>

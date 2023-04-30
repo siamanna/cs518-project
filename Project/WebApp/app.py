@@ -3,6 +3,7 @@ from fields import fields, length, display
 import requests
 import json
 import os
+import re
 
 
 create_url = "https://dataservice12345.azurewebsites.net/api/CreateRecord"
@@ -21,8 +22,17 @@ app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 @app.route('/index')
-def index():
+def login():
     return render_template('index.html')
+
+
+@app.route('/admin_home')
+def admin_home():
+    return render_template('admin_home.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 @app.route('/records', methods=['GET'])  # create a new route for /records endpoint
 def records():
@@ -62,13 +72,13 @@ def create():
         response = requests.post(create_url, headers=headers, data=data)
         if response.status_code == 200:
             return redirect(url_for('records'))
-    return render_template('create.html', fields=fields)
+    return render_template('create.html', fields=fields, display=display)
 
 
 @app.route('/search', methods=['GET', 'POST'])  # create a new route for /records endpoint
 def search():
     if request.method == 'GET':
-        return render_template('search.html', fields=fields)
+        return render_template('search.html', fields=fields, display=display)
         
     data = request.form.to_dict()
     
@@ -99,7 +109,7 @@ def search():
                 records.append(new_dict)
                 
     # render the records.html template and pass in the records list as a variable
-    return render_template('records.html', records=records, fields=fields)
+    return render_template('records.html', records=records, fields=fields, display=display)
 
 @app.route('/delete', methods=['GET', 'DELETE'])
 def delete():
@@ -110,7 +120,7 @@ def delete():
         response = requests.delete(delete_url, headers=headers, data=data)
         if response.status_code == 200:
             return redirect(url_for('records'))
-    return render_template('delete.html', fields=fields)
+    return render_template('delete.html', fields=fields, display=display)
 
 def main():
     port = int(os.environ.get('PORT', 5000))

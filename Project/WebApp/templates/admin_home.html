@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LibraryCatalog&trade; Home</title>
+	<title>LibraryCatalog&trade; Admin Home</title>
 	<style>
 		body {
 			margin: 0;
@@ -17,7 +17,6 @@
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 			border-radius: 5px;
 			text-align: center;
-			position: relative; /* add position property */
 		}
 		h1 {
 			margin-bottom: 30px;
@@ -46,20 +45,23 @@
 		a:hover {
 			background-color: #4c0598;
 		}
-		.logo {
-			position: absolute; /* add position property */
-			bottom: -50px; /* set the bottom distance */
-			left: 50%; /* center horizontally */
-			transform: translateX(-50%); /* center horizontally */
-		}
 	</style>
 </head>
 <body>
+	<script>
+		var username = prompt("Enter admin username:");
+		var password = prompt("Password:");
+	</script>
+
 	<div class="container">
-		<h1>Choose User</h1>
+		<h1>LibraryCatalog&trade; Home</h1>
 		<ul>
-			<li><a href="{{ url_for('home') }}">Public</a></li>
-			<li><a href="{{ url_for('admin_home') }}">Admin</a></li>
+            <li><a href="{{ url_for('login') }}">Back</a></li>
+            <li><a href="{{ url_for('search') }}">Search</a></li>
+			<li><a href="{{ url_for('records') }}">Browse All Books</a></li>
+			<li><a href="{{ url_for('create') }}">Create new record</a></li>
+            <li><a href="{{ url_for('delete') }}">Delete record</a></li>
+			<!-- Add more links here as needed -->
 		</ul>
 	</div>
 </body>
