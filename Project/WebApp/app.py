@@ -128,18 +128,36 @@ def rating():
     # render the records.html template and pass in the records list as a variable
     return render_template('records.html', records=clean_response(records_list), fields=fields)
 
-@app.route('/records', methods=['GET'])  # create a new route for /records endpoint
+@app.route('/records', methods=['GET', 'POST'])  # create a new route for /records endpoint
 def records():
     fields['html']['title'] = 'Library Catalog'
-
-    # send a GET request to read record API
     response = requests.get(read_url, params=search_query)
-
-    # parse the JSON response into a Python list of dictionaries
     records_list = json.loads(response.content)
-    
-    # render the records.html template and pass in the records list as a variable
     return render_template('records.html', records=clean_response(records_list), fields=fields)
+    
+    
+@app.route('/book', methods=['POST'])  # create a new route for /records endpoint
+def book():
+    title = {'title': request.form['link']}
+    response = requests.get(read_url, json=title)
+    records_list = list(json.loads(response.content))[0]
+    records = {}
+    for k,v in records_list.items():
+        if isinstance(v, str):
+            v = v.replace('[', '').replace(']', '').replace('\'', '')
+            if k.lower in fields:
+                if fields[k.lower]['case'] == 'title':
+                    records[k.lower()] = v.title()
+                else:
+                    if fields[k.lower]['case'] == 'lower':
+                        records[k.lower()] = v.lower()
+                    else:
+                        records[k.lower()] = v.title()
+            else:
+                records[k.lower()] = v.title()
+    return render_template('book.html', records=records, fields=fields)
+    
+      
 
 
 

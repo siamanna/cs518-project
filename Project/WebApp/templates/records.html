@@ -15,6 +15,7 @@
             margin-top: 50px;
             margin-bottom: 30px;
             font-size: 36px;
+            color: #6610f2;
         }
         table {
             margin: 0 auto;
@@ -69,8 +70,12 @@
                 <tr>
                     {% for k, v in fields.items() %}
                         {% if k in record %}
-                            {% if k == 'coverimg' and record[k.lower()] != '' %}
-                                <td><img src={{ record[k.lower()] }} alt="your image" width="50" height="50"></td>
+                            {% if k.lower() == 'title' %}
+                                <td>
+                                    <a href="#" onclick="submitForm(this, '{{ record[k.lower()].lower() }}')">{{ record[k.lower()].title() }}</a>
+                                </td>
+                            {% elif k.lower() == 'coverimg' and record[k.lower()] != '' %}
+                                <td><img src={{ record[k.lower()] }} alt="your image" width="70" height="80"></td>
                             {% elif v['case'] == 'lower' %}
                                 <td>{{ record[k.lower()].lower() }}</td>
                             {% elif v['case'] == 'upper' %}
@@ -88,5 +93,21 @@
             {% endfor %}
         </tbody>
     </table>
+    <script>
+        function submitForm(linkElement, link) {
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", "/book");
+    
+            var input = document.createElement("input");
+            input.setAttribute("type", "hidden");
+            input.setAttribute("name", "link");
+            input.setAttribute("value", link);
+    
+            form.appendChild(input);
+            linkElement.parentNode.appendChild(form);
+            form.submit();
+        }
+    </script>
 </body>
 </html>

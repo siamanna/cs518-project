@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{records['title'].title()}}</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: 100;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #6610f2;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+        h2 {
+            color: gray;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .field {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        button {
+            margin-right: 10px;
+            background-color: #6610f2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #3b0071;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            {% if fields['admin'] %}
+                <button onclick="location.href='admin_home'">Home</button>
+            {% else %}
+                <button onclick="location.href='public_home'">Home</button>
+            {% endif %}
+            <button onclick="location.href='search'">Search</button>
+            <button onclick="location.href='records'">Browse Catalog</button>
+            {% if fields['admin'] %}
+                <button onclick="location.href='create'">Create New Record</button>
+                <button onclick="location.href='delete'">Delete Record</button>
+            {% endif %}
+            <button onclick="location.href='browse'">Browse categories</button>
+            <button onclick="location.href='index'">Log out</button>
+        </div>
+        <h1>{{records['title'].title()}}</h1>
+        <h2>by {{records['author'].title()}}</h2>
+    
+        {% for field, content in records.items() %}
+            {% if field in fields %}
+                <p class="field">{{ fields[field.lower()]['display'] }}</p>
+            {% else %}
+                <p class="field">{{ field.title() }}</p>
+            {% endif %}
+            <p class="content">{{ content }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
