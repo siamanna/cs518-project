@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Record</title>
+    <title>
+        {% if fields['admin'] == True %}
+            {{ 'Admin: ' + fields['html']['title'] }}
+        {% else %}
+            {{ fields['html']['title'] }}
+        {% endif %}
+    </title>
     <style>
         body {
             display: flex;
@@ -21,7 +27,7 @@
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
         }
         h1 {
-            margin-top: 0;
+            margin-top: 50px;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -56,10 +62,10 @@
     </style>
     <script>
         function validateForm() {
-            var fields = document.querySelectorAll('input');
+            var input_fields = document.querySelectorAll('input');
             var isValid = false;
-            for (var i = 0; i < fields.length; i++) {
-                if (fields[i].value) {
+            for (var i = 0; i < input_fields.length; i++) {
+                if (input_fields[i].value) {
                     isValid = true;
                     break;
                 }
@@ -73,16 +79,27 @@
 </head>
 <body>
     <div class="container">
-        <h1><br><br><br><br><br><br><br><br><br>Create Record</h1>
+        <h1>
+            <br><br><br><br><br><br><br><br><br>
+            {% if fields['admin'] == True %}
+                {{ 'Admin: ' + fields['html']['title'] }}
+            {% else %}
+                {{ fields['html']['title'] }}
+            {% endif %}
+        </h1>
         <div>
             <button onclick="location.href='home'">Home</button>
             <button onclick="location.href='search'">Search</button>
-            <button onclick="location.href='create'">Create Record</button>
-            <button onclick="location.href='delete'">Delete Record</button>
+            <button onclick="location.href='records'">Brows Catalog</button>
+            {% if fields['admin'] %}
+                <button onclick="location.href='create'">Create New Record</button>
+                <button onclick="location.href='delete'">Delete Record</button>
+            {% endif %}
+            <button onclick="location.href='index'">Log out</button>
             <p><br><br></p>
         </div>
         <form method="post" onsubmit="return validateForm();">
-            {% for field, v in fields.items() %}
+            {% for field, v in fields.items() if field != 'admin' and field != 'html'and field != 'coverimg' %}
                 <label for="{{ field.lower() }}">{{ v['display'] }}:</label>
                 <input id="{{ field }}" name="{{ field }}">
             {% endfor %}

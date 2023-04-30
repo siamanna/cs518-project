@@ -22,7 +22,13 @@ def csv_to_dict_list(filename):
         reader = csv.DictReader(file)
         result = []
         for row in reader:
-            result.append(row)
+            r = {}
+            for k, v in row.items():
+                if k.lower() == 'coverimg':
+                    r[k.lower()] = v
+                else:
+                    r[k.lower()] = v.lower()
+            result.append(r)
         return result
 
 def iterate():

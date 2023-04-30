@@ -17,5 +17,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             body = req.params
         except ValueError as e:
             body = {}
+    # query = {}
+    # for k,v in body:
+    #     if isinstance(v, str):
+    #         query[k] = { "$regex": v, "$options": "i" }
+    #     else:
+    #         query[k] = v
     result = data_manager.read(body)
     return func.HttpResponse(body=parse_json(result), status_code=200)

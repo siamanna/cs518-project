@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3106395-504e-43e2-bc54-428287894d15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../DataService/DeleteRecord/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DataService/DeleteRecord/function.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WebApp2/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WebApp2/.idea/WebApp2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WebApp2/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WebApp2/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WebApp2/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WebApp2/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WebApp2/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DataService/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DataService/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DataService/CreateRecord/function.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DataService/CreateRecord/function.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DataService/test/fill_dataset_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DataService/test/fill_dataset_script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +107,7 @@
       <workItem from="1681246894189" duration="661000" />
       <workItem from="1681248989291" duration="1206000" />
       <workItem from="1682519420850" duration="1034000" />
-      <workItem from="1682780861860" duration="2292000" />
+      <workItem from="1682780861860" duration="2958000" />
     </task>
     <servers />
   </component>

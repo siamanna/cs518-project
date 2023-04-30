@@ -51,10 +51,15 @@
 	<div class="container">
 		<h1>LibraryCatalog&trade; Home</h1>
 		<ul>
-            <li><a href="{{ url_for('login') }}">Back</a></li>
             <li><a href="{{ url_for('search') }}">Search</a></li>
 			<li><a href="{{ url_for('records') }}">Browse All Books</a></li>
 			<!-- Add more links here as needed -->
+
+            {% if fields['admin'] %}
+                <li><a href="{{ url_for('create') }}">Create Record</a></li>
+                <li><a href="{{ url_for('delete') }}">Delete Record</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('index') }}">Log Out</a></li>
 		</ul>
 	</div>
 </body>

@@ -2,6 +2,7 @@ import requests
 import unittest
 import json
 import pymongo
+import data_manager
 
 username = "cs518"
 password = "ltgDm6reWuHh2m5E"
@@ -97,4 +98,6 @@ class TestDataServiceAPI(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    result = data_manager.read({ "title": { "$regex": "hunger", "$options": "i" } })
+    print(result)
+    #unittest.main()

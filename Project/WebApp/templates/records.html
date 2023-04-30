@@ -45,29 +45,38 @@
     <div>
         <button onclick="location.href='home'">Home</button>
         <button onclick="location.href='search'">Search</button>
-        <button onclick="location.href='create'">Create Record</button>
-        <button onclick="location.href='delete'">Delete Record</button>
+        {% if fields['admin'] %}
+            <button onclick="location.href='create'">Create Record</button>
+            <button onclick="location.href='delete'">Delete Record</button>
+        {% endif %}
+        <button onclick="location.href='index'">Log out</button>
     </div>
     <table>
         <thead>
             <tr>
-                {% for key in fields%}
-                    <th>{{ display[key.lower()] }}</th>
+                {% for k,v in fields.items()%}
+                    <th>{{ v['display'] }}</th>
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
            {% for record in records %}
                 <tr>
-                    {% for key in fields%}
-                        {% if key.lower() in record%}
-                            {% if key.lower() == 'coverimg' and record[key.lower()] != ''%}
-                                <td><img src={{ record[key.lower()] }} alt="your image" width="50" height="50"></td>
+                    {% for k, v in fields.items() %}
+                        {% if k in record %}
+                            {% if k == 'coverimg' and record[k.lower()] != '' %}
+                                <td><img src={{ record[k.lower()] }} alt="your image" width="50" height="50"></td>
+                            {% elif v['case'] == 'lower' %}
+                                <td>{{ record[k.lower()].lower() }}</td>
+                            {% elif v['case'] == 'upper' %}
+                                <td>{{ record[k.lower].upper() }}</td>
+                            {% elif v['case'] == 'title' %}
+                                <td>{{ record[k.lower()].title() }}</td>
                             {% else %}
-                                <td>{{ record[key.lower()] }}</td>
+                                <td>{{ record[k.lower()] }}</td>
                             {% endif %}
                         {% else %}
-                            <td></td>
+                            <td>. . .</td>
                         {% endif %}
                     {% endfor %}
                 </tr>

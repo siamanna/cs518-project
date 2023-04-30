@@ -60,7 +60,15 @@ def read(query, one=False):
         else: return get_mycol().find_one(query)
     else:
         if len(query) == 0: return list(get_mycol().find())
-        else: return list(get_mycol().find(query))
+        else: 
+            return list(get_mycol().find(query))
+            # global my_col
+            # while my_col is None:
+            #     initialize()
+            # results = my_col.find(query)
+            # result_list = list(results)
+            # return result_list
+
 
 """
 Update document(s) that match the query in the collection with new values.
