@@ -88,7 +88,11 @@
             {% endif %}
         </h1>
         <div>
-            <button onclick="location.href='home'">Home</button>
+            {% if fields['admin'] %}
+                <button onclick="location.href='admin_home'">Home</button>
+            {% else %}
+                <button onclick="location.href='public_home'">Home</button>
+            {% endif %}
             <button onclick="location.href='search'">Search</button>
             <button onclick="location.href='records'">Brows Catalog</button>
             {% if fields['admin'] %}

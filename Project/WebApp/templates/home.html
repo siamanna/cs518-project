@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LibraryCatalog&trade; Home</title>
+	<title>
+        {% if fields['admin'] == True %}
+            LibraryCatalog&trade; Admin Home
+        {% else %}
+            LibraryCatalog&trade; Home
+        {% endif %}
+        LibraryCatalog&trade; Home
+    </title>
 	<style>
 		body {
 			margin: 0;

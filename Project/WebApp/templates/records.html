@@ -43,12 +43,16 @@
 <body>
     <h1>Library Catalog</h1>
     <div>
-        <button onclick="location.href='home'">Home</button>
-        <button onclick="location.href='search'">Search</button>
         {% if fields['admin'] %}
-            <button onclick="location.href='create'">Create Record</button>
-            <button onclick="location.href='delete'">Delete Record</button>
-        {% endif %}
+                <button onclick="location.href='admin_home'">Home</button>
+            {% else %}
+                <button onclick="location.href='public_home'">Home</button>
+            {% endif %}
+            <button onclick="location.href='search'">Search</button>
+            {% if fields['admin'] %}
+                <button onclick="location.href='create'">Create New Record</button>
+                <button onclick="location.href='delete'">Delete Record</button>
+            {% endif %}
         <button onclick="location.href='index'">Log out</button>
     </div>
     <table>

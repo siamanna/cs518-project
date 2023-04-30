@@ -26,14 +26,17 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/admin_home')
+@app.route('/admin_home', methods=['GET', 'POST', 'PUT'])
 def admin_home():
     fields['html']['title'] = 'Admin Home'
+    if fields['admin']:
+        return render_template('home.html', fields=fields)
+    
     fields['admin'] = True
-    return render_template('home.html', fields=fields)
+    return render_template('login.html', fields=fields)
 
-@app.route('/home')
-def home():
+@app.route('/public_home')
+def public_home():
     fields['html']['title'] = 'Home'
     fields['admin'] = False
     return render_template('home.html', fields=fields)
