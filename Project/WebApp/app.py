@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from fields import fields
+from fields import fields, browse_categories
 import requests
 import json
 import os
@@ -41,6 +41,93 @@ def public_home():
     fields['admin'] = False
     return render_template('home.html', fields=fields)
 
+
+@app.route('/browse')
+def browse():
+    return render_template('browse.html', browse_categories=browse_categories, fields=fields)
+
+@app.route('/genres', methods=['GET', 'POST'])
+def genres():
+    return browse_category('genres', request)
+    # if request.method == 'GET':
+    #     category=browse_categories['genres']
+    #     category['category']='genres'
+    #     return render_template('category.html', category=category, fields=fields)
+    
+    # selections = request.form.getlist('selectedOptions[]')
+    
+    # options = []
+    
+    # for selection in selections:
+    #     options.append({'genres':{"$regex": selection.lower()}})
+        
+    # search_q = {"$or": options}
+            
+    # response = requests.get(read_url, json=search_q)
+    # records_list = json.loads(response.content)
+    
+    # # render the records.html template and pass in the records list as a variable
+    # return render_template('records.html', records=clean_response(records_list), fields=fields)
+
+
+def browse_category(category, request):
+    if request.method == 'GET':
+        category_=browse_categories[category]
+        category_['category']=category
+        return render_template('category.html', category=category_, fields=fields)
+    
+    selections = request.form.getlist('selectedOptions[]')
+    
+    options = []
+    
+    for selection in selections:
+        if selection.lower() == 'all':
+            return redirect(url_for('records'))
+        options.append({category:{"$regex": selection.lower()}})
+        
+    search_q = {"$or": options}
+            
+    response = requests.get(read_url, json=search_q)
+    records_list = json.loads(response.content)
+    
+    # render the records.html template and pass in the records list as a variable
+    return render_template('records.html', records=clean_response(records_list), fields=fields)
+
+    
+
+@app.route('/author', methods=['GET', 'POST'])
+def author():
+    return browse_category('author', request)
+
+@app.route('/rating', methods=['GET', 'POST'])
+def rating():
+    if request.method == 'GET':
+        category=browse_categories['rating']
+        category['category']='rating'
+        return render_template('category.html', category=category, fields=fields)
+
+    selections = request.form.getlist('selectedOptions[]')
+    options = []
+    for selection in selections:
+        if selection.lower() == 'all':
+            return redirect(url_for('records'))
+        if '1' in selection:
+            options.append({'rating':{"$regex": '1'}})
+        if '3' not in selection and '4' not in selection:
+            options.append({'rating':{"$regex": '2'}})
+        if '4' not in selection:
+            options.append({'rating':{"$regex": '3'}})
+        options.append({'rating':{"$regex": '4'}})
+        options.append({'rating':{"$regex": '5'}})
+        
+    search_q = {"$or": options}
+            
+    response = requests.get(read_url, json=search_q)
+    records_list = json.loads(response.content)
+    
+    # render the records.html template and pass in the records list as a variable
+    return render_template('records.html', records=clean_response(records_list), fields=fields)
+
 @app.route('/records', methods=['GET'])  # create a new route for /records endpoint
 def records():
     fields['html']['title'] = 'Library Catalog'
@@ -53,6 +140,7 @@ def records():
     
     # render the records.html template and pass in the records list as a variable
     return render_template('records.html', records=clean_response(records_list), fields=fields)
+
 
 
 def clean_response(records_list):

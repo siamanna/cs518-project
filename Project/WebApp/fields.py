@@ -1,4 +1,5 @@
-fields2 = ['coverimg', 'publishdate', 'title', 'author', 'edition', 'rating', 'language', 'isbn', 'genres', 'publisher', 'pages', 'setting', 'characters', 'bookformat', 'description', 'awards']
+
+
 fields = {
     'admin': False,
     'html': {
@@ -102,4 +103,106 @@ fields = {
     }
 }
 
-length = {'coverimg': 100, 'title': 45, 'author': 45, 'edition': 15, 'rating': 45, 'language': 45, 'isbn': 45, 'genres': 45, 'publisher': 15, 'pages': 45, 'setting': 20, 'characters': 45, 'bookformat': 45, 'description': 200, 'publishdate': 45, 'awards': 45}
+browse_categories = {
+    'genres': {
+        'options': ['All', '19th Century', 'Action', 'Adventure', 'Adult', 'Adult Fiction', 'Audiobook', 'Books About Books', 'British Literature', 'Chick Lit', 'Childrens', 'Christian', 'Christian Fiction', 'Classics', 'Comedy', 'Coming Of Age', 'Contemporary', 'Crime', 'Drama', 'Dystopia', 'Epic Fantasy', 'Fairy Tales', 'Fantasy', 'French Literature', 'Gothic', 'Greek Mythology', 'High Fantasy', 'Historical', 'Historical Fiction', 'Historical Romance', 'Holocaust', 'Horror', 'Humor', 'Japan', 'Juvenile', 'Kids', 'Latin American', 'Literary Fiction', 'Literature', 'Love', 'Magic', 'Magical Realism', 'Middle Grade', 'Mystery', 'Mystery Thriller', 'Novels', 'Paranormal', 'Paranormal Romance', 'Philosophy', 'Picture Books', 'Poetry', 'Politics', 'Post Apocalyptic', 'Realistic Fiction', 'Read For School', 'Romance', 'School', 'Science Fiction', 'Science Fiction Fantasy', 'Short Stories', 'Spanish Literature', 'Supernatural', 'Suspense', 'Teen', 'Thriller', 'Time Travel', 'Urban Fantasy', 'Vampires', 'War', 'World War II', 'Young Adult'],
+        'category': 'genres'
+    },
+    'author': {
+        'options': ['All', 'A.A. Milne',
+            'Aldous Huxley',
+            'Alice Sebold',
+            'Alice Walker',
+            'Anita Diamant',
+            'Anthony Burgess',
+            'Antoine de Saint-Exupéry',
+            'Arthur Conan Doyle',
+            'Arthur Golden',
+            'Barbara Kingsolver',
+            'Betty Smith',
+            'Bram Stoker',
+            'Cassandra Clare',
+            'Charles Dickens',
+            'Charlotte Brontë',
+            'Cormac McCarthy',
+            'Dan Brown',
+            'Daphne du Maurier',
+            'Diana Gabaldon',
+            'Douglas Adams',
+            'E.B. White',
+            'Edgar Allan Poe',
+            'Emily Brontë',
+            'Ernest Hemingway',
+            'F. Scott Fitzgerald',
+            'Frances Hodgson Burnett',
+            'Frank Herbert',
+            'Frank McCourt',
+            'Fyodor Dostoyevsky',
+            'Gabriel García Márquez',
+            'George Orwell',
+            'George R.R. Martin',
+            'Herman Melville',
+            'Hermann Hesse',
+            'Homer',
+            'J.D. Salinger',
+            'J.K. Rowling',
+            'Jane Austen',
+            'Jodi Picoult',
+            'John Green',
+            'John Irving',
+            'John Steinbeck',
+            'Joseph Heller',
+            'J.R.R. Tolkien',
+            'Ken Follett',
+            'Ken Kesey',
+            'Khaled Hosseini',
+            'Kurt Vonnegut Jr.',
+            'L.M. Montgomery',
+            'Leo Tolstoy',
+            'Lewis Carroll',
+            'Lois Lowry',
+            'Louisa May Alcott',
+            'Madeleine LEngle',
+            'Margaret Atwood',
+            'Margaret Mitchell',
+            'Mark Twain',
+            'Markus Zusak',
+            'Mary Wollstonecraft Shelley',
+            'Maurice Sendak',
+            'Miguel de Cervantes Saavedra',
+            'Nicholas Sparks',
+            'Oscar Wilde',
+            'Orson Scott Card',
+            'Paulo Coelho',
+            'Philip Pullman',
+            'Ray Bradbury',
+            'Rick Riordan',
+            'Richard Adams',
+            'Roald Dahl',
+            'S.E. Hinton',
+            'Sara Gruen',
+            'Shel Silverstein',
+            'Stephen Chbosky',
+            'Stephen King',
+            'Stephenie Meyer',
+            'Sue Monk Kidd',
+            'Sylvia Plath',
+            'Suzanne Collins',
+            'Veronica Roth',
+            'Vladimir Nabokov',
+            'William Goldman',
+            'William Golding',
+            'William Shakespeare',
+            'Yann Martel'],
+        'category': 'author'
+    },
+    'rating': {
+        'options': ['1 star and above', '2 stars and above', '3 stars and above', '4 stars and above', 'All'],
+        'category': 'rating'
+    }
+}
+
+
+
+
+

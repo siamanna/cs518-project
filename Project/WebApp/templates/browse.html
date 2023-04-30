@@ -56,18 +56,11 @@
 </head>
 <body>
 	<div class="container">
-		<h1>LibraryCatalog&trade; Home</h1>
+		<h1>Choose a category:</h1>
 		<ul>
-            <li><a href="{{ url_for('search') }}">Search</a></li>
-			<li><a href="{{ url_for('records') }}">Browse All Books</a></li>
-            <li><a href="{{ url_for('browse') }}">Browse By Category</a></li>
-			<!-- Add more links here as needed -->
-
-            {% if fields['admin'] %}
-                <li><a href="{{ url_for('create') }}">Create Record</a></li>
-                <li><a href="{{ url_for('delete') }}">Delete Record</a></li>
-            {% endif %}
-            <li><a href="{{ url_for('index') }}">Log Out</a></li>
+            {% for category, meta_data in browse_categories.items() %}
+                <li><a href="{{ url_for(category) }}">{{ fields[category]['display'] }}</a></li>
+            {% endfor %}
 		</ul>
 	</div>
 </body>
