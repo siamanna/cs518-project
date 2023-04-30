@@ -155,6 +155,12 @@ def book():
                         records[k.lower()] = v.title()
             else:
                 records[k.lower()] = v.title()
+        # for field, content in records.items():
+        #     if field in fields:
+        #         print(f"<p class='field'>{fields[field.lower()]['display']}</p>")
+        #     else:
+        #         print(f"<p class='field'>{field.title()}</p>")
+        #     print(f"<p class='content'>{content}</p>")
     return render_template('book.html', records=records, fields=fields)
     
       

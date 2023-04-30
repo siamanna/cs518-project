@@ -5,10 +5,9 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            margin-top: 100;
+            margin: 0;
             padding: 0;
             background-color: #f2f2f2;
             font-family: Arial, sans-serif;
@@ -34,6 +33,10 @@
             margin-bottom: 30px;
             font-size: 24px;
         }
+        .container2 {
+            text-align: left;
+            padding-left: 50px;
+        }
         .field {
             font-weight: bold;
             margin-bottom: 10px;
@@ -42,7 +45,6 @@
             margin-bottom: 30px;
         }
         button {
-            margin-right: 10px;
             background-color: #6610f2;
             color: #fff;
             border: none;
@@ -50,6 +52,10 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+        }
+    
+        button:not(:last-child) {
+            margin-right: 10px;
         }
     
         button:hover {
@@ -76,15 +82,16 @@
         </div>
         <h1>{{records['title'].title()}}</h1>
         <h2>by {{records['author'].title()}}</h2>
-    
-        {% for field, content in records.items() %}
-            {% if field in fields %}
-                <p class="field">{{ fields[field.lower()]['display'] }}</p>
-            {% else %}
-                <p class="field">{{ field.title() }}</p>
-            {% endif %}
-            <p class="content">{{ content }}</p>
-        {% endfor %}
+        <div class="container2">
+            {% for field, content in records.items() %}
+                {% if field in fields %}
+                    <p class="field">{{ fields[field.lower()]['display'] }}</p>
+                {% else %}
+                    <p class="field">{{ field.title() }}</p>
+                {% endif %}
+                <p class="content">{{ content }}</p>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>
