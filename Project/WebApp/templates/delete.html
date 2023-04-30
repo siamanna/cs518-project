@@ -39,7 +39,7 @@
             border-radius: 3px;
             font-size: 16px;
         }
-        button {
+        .button_submit {
             margin-top: 15px;
             padding: 10px;
             background-color: #4b0082;
@@ -73,14 +73,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Delete Record</h1>
-        <p><a href="{{ url_for('index') }}">Index</a> &gt; Delete Record</p>
+        <h1><br><br><br><br><br><br><br><br><br>Delete Record</h1>
+        <div>
+            <button onclick="location.href='index'">Home</button>
+            <button onclick="location.href='search'">Search</button>
+            <button onclick="location.href='create'">Create Record</button>
+            <button onclick="location.href='delete'">Delete Record</button>
+            <p><br><br></p>
+        </div>
         <form method="delete" onsubmit="return validateForm();">
             {% for field in fields %}
                 <label for="{{ field.lower() }}">{{ field }}:</label>
                 <input id="{{ field.lower() }}" name="{{ field.lower() }}">
             {% endfor %}
-            <button type="submit">Submit</button>
+            <button class="button_submit"; type="submit">Submit</button>
         </form>
     </div>
 </body>

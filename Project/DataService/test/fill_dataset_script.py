@@ -4,6 +4,7 @@ import requests
 import data_manager
 
 filename = "test\\books_dataset.csv"
+num_to_insert = 1000
 
 username = "cs518"
 password = "ltgDm6reWuHh2m5E"
@@ -24,10 +25,18 @@ def csv_to_dict_list(filename):
             result.append(row)
         return result
 
-if __name__ == "__main__":
+def iterate():
     result = csv_to_dict_list(filename)
+    count = 0
     for dict in result: 
+        count = count + 1
+        if (count > num_to_insert):
+            return ''
         post_response = requests.post(create_url, json=dict, headers=headers)
         print(post_response)
+    
 
+if __name__ == "__main__":
+    result = csv_to_dict_list(filename)
+    iterate()
     print('done')

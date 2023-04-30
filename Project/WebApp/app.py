@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from fields import fields, length
+from fields import fields, length, display
 import requests
 import json
 import os
@@ -52,7 +52,7 @@ def records():
                 records.append(new_dict)
 
     # render the records.html template and pass in the records list as a variable
-    return render_template('records.html', records=records, fields=fields)
+    return render_template('records.html', records=records, fields=fields, display=display)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():

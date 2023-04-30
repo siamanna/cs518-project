@@ -52,7 +52,7 @@
         <thead>
             <tr>
                 {% for key in fields%}
-                    <th>{{ key }}</th>
+                    <th>{{ display[key.lower()] }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -61,7 +61,11 @@
                 <tr>
                     {% for key in fields%}
                         {% if key.lower() in record%}
-                            <td>{{ record[key.lower()] }}</td>
+                            {% if key.lower() == 'coverimg' and record[key.lower()] != ''%}
+                                <td><img src={{ record[key.lower()] }} alt="your image" width="50" height="50"></td>
+                            {% else %}
+                                <td>{{ record[key.lower()] }}</td>
+                            {% endif %}
                         {% else %}
                             <td></td>
                         {% endif %}
