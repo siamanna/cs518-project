@@ -197,7 +197,7 @@ def create():
     return render_template('form.html', fields=fields)
 
 
-@app.route('/search', methods=['GET', 'POST'])  # create a new route for /records endpoint
+@app.route('/search', methods=['GET', 'POST'])  # create a new route for /search endpoint
 def search():
     fields['html']['title'] = 'Search Records'
     if request.method == 'GET':
@@ -212,7 +212,7 @@ def search():
             
     # # pattern = re.compile('.*hunger games.*', re.IGNORECASE)
     # # search_q = {'title':{"$regex":"hunger games","$options":"i"}}
-    # search_q = '{"title":{"$regex":"hunger games","$options":"i"}}'
+    # search_q = '{"title":{"$regex":"hunger games","$options":"i"}}'D
     # # search_q = read_url + '{"title":{"$regex":"hunger games","$options":"i"}}'
 
     # search_q = {"title": {"$regex":"hunger games"}}
