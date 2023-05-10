@@ -48,12 +48,23 @@
   </head>
   <body>
     <h1>Admin Login</h1>
-    <form method="post" action="{{ url_for('admin_home') }}">
+    <form onsubmit="return validateForm()" method="post" action="{{ url_for('admin_home') }}">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username"><br>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password"><br>
       <input type="submit" value="Login">
     </form>
+    <script>
+      function validateForm() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if (username !== 'Admin' || password !== 'admin') {
+          alert('Invalid username or password');
+          return false;
+        }
+        return true;
+      }
+    </script>
   </body>
 </html>

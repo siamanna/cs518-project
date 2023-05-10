@@ -39,6 +39,16 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        .pagination a {
+            margin: 0 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -93,6 +103,10 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="pagination">
+    <a id="prev-page" onclick="changePage(-1)">&laquo; Prev</a>
+    <a id="next-page" onclick="changePage(1)">Next &raquo;</a>
+    </div>
     <script>
         function submitForm(linkElement, link) {
             var form = document.createElement("form");
@@ -108,6 +122,43 @@
             linkElement.parentNode.appendChild(form);
             form.submit();
         }
+    </script>
+    <script>
+        var currentPage = 1;
+        var rowsPerPage = 25;  // the number of rows you want per page
+
+        var rows = document.querySelector('tbody').children;
+
+        function updateTable() {
+            document.getElementById('prev-page').style.visibility = (currentPage == 1 || rows.length == 0) ? 'hidden' : 'visible';
+            document.getElementById('next-page').style.visibility = (end >= rows.length || rows.length == 0) ? 'hidden' : 'visible';
+            var start = (currentPage - 1) * rowsPerPage;
+            var end = start + rowsPerPage;
+
+            // hide all rows
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].style.display = 'none';
+            }
+
+            // show only the ones for the current page
+            for (var i = start; i < end; i++) {
+                if (rows[i]) {
+                    rows[i].style.display = '';
+                }
+            }
+
+            // Update the Prev/Next buttons
+            document.getElementById('prev-page').style.visibility = (currentPage == 1) ? 'hidden' : 'visible';
+            document.getElementById('next-page').style.visibility = (end >= rows.length) ? 'hidden' : 'visible';
+        }
+
+        function changePage(delta) {
+            currentPage += delta;
+            updateTable();
+        }
+
+        // call updateTable once at the start to show the first page
+        updateTable();
     </script>
 </body>
 </html>
