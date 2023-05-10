@@ -104,13 +104,14 @@
             <button onclick="location.href='index'">Log out</button>
             <p><br><br></p>
         </div>
-        <form method="post" onsubmit="return validateForm();">
+        <form method="POST" onsubmit="return validateForm();">
+            <input type="hidden" name="_method" value="{{ fields['html']['method'] }}">
             {% for field, v in fields.items() if field != 'admin' and field != 'html'and field != 'coverimg' %}
                 <label for="{{ field.lower() }}">{{ v['display'] }}:</label>
                 <input id="{{ field }}" name="{{ field }}">
             {% endfor %}
             <button class="button_submit"; type="submit">Submit</button>
-        </form>
+        </form>        
     </div>
 </body>
 </html>

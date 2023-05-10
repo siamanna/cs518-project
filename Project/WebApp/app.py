@@ -188,6 +188,7 @@ def clean_response(records_list):
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     fields['html']['title'] = 'Create Record'
+    fields['html']['method'] = 'POST'
     if request.method == 'POST':
         data = request.form.to_dict()
         data = json.dumps(data)
@@ -200,6 +201,7 @@ def create():
 @app.route('/search', methods=['GET', 'POST'])  # create a new route for /search endpoint
 def search():
     fields['html']['title'] = 'Search Records'
+    fields['html']['method'] = 'POST'
     if request.method == 'GET':
         return render_template('form.html', fields=fields)
         
@@ -228,11 +230,12 @@ def search():
     # render the records.html template and pass in the records list as a variable
     return render_template('records.html', records=clean_response(records_list), fields=fields)
 
-@app.route('/delete', methods=['GET', 'DELETE'])
+@app.route('/delete', methods=['GET', 'DELETE', 'POST'])
 def delete():
     fields['html']['title'] = 'Delete Record'
+    fields['html']['method'] = 'DELETE'
     print(request.method)
-    if request.method == 'DELETE':
+    if request.method == 'POST' and request.form.get('_method') == 'DELETE':
         data = request.form.to_dict()
         data = json.dumps(data)
         response = requests.delete(delete_url, headers=headers, data=data)

@@ -3,7 +3,8 @@
 fields = {
     'admin': False,
     'html': {
-        'title': ''
+        'title': '',
+        'method': 'POST'
     },
     'coverimg': {
         'display': 'Cover',
