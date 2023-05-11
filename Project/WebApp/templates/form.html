@@ -60,6 +60,12 @@
         button:hover {
             background-color: #3b0071;
         }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+          }
     </style>
     <script>
         function validateForm() {
@@ -104,6 +110,10 @@
             <button onclick="location.href='index'">Log out</button>
             <p><br><br></p>
         </div>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
         <form method="POST" onsubmit="return validateForm();">
             <input type="hidden" name="_method" value="{{ fields['html']['method'] }}">
             {% for field, v in fields.items() if field != 'admin' and field != 'html'and field != 'coverimg' %}

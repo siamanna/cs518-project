@@ -163,9 +163,7 @@ def book():
         #     print(f"<p class='content'>{content}</p>")
     return render_template('book.html', records=records, fields=fields)
     
-      
-
-
+    
 
 def clean_response(records_list):
     records = []
@@ -195,6 +193,9 @@ def create():
         response = requests.post(create_url, headers=headers, data=data)
         if response.status_code == 200:
             return redirect(url_for('records'))
+        else:
+            error_msg = f"Error: {response.status_code} - {response.reason}"
+            return render_template('form.html', fields=fields, error=error_msg)
     return render_template('form.html', fields=fields)
 
 
@@ -209,21 +210,12 @@ def search():
     
     search_q = {}
     for k, v in data.items():
-        if v != '':
+        if v != '' and k != '_method':
             search_q[k] = {"$regex": v.lower()}
             
-    # # pattern = re.compile('.*hunger games.*', re.IGNORECASE)
-    # # search_q = {'title':{"$regex":"hunger games","$options":"i"}}
-    # search_q = '{"title":{"$regex":"hunger games","$options":"i"}}'D
-    # # search_q = read_url + '{"title":{"$regex":"hunger games","$options":"i"}}'
-
-    # search_q = {"title": {"$regex":"hunger games"}}
     # send a GET request to read record API
     response = requests.get(read_url, json=search_q)
     
-    # response = requests.get(read_url, params=search_q)
-
-
     # parse the JSON response into a Python list of dictionaries
     records_list = json.loads(response.content)
     
@@ -237,10 +229,17 @@ def delete():
     print(request.method)
     if request.method == 'POST' and request.form.get('_method') == 'DELETE':
         data = request.form.to_dict()
+        search_q = {}
+        for k, v in data.items():
+            if v != '' and k != '_method':
+                search_q[k] = {"$regex": v.lower()}
         data = json.dumps(data)
-        response = requests.delete(delete_url, headers=headers, data=data)
+        response = requests.delete(delete_url, json=search_q)
         if response.status_code == 200:
             return redirect(url_for('records'))
+        else:
+            error_msg = f"Error: {response.status_code} - {response.reason}"
+            return render_template('form.html', fields=fields, error=error_msg)
     return render_template('form.html', fields=fields)
 
 def main():
