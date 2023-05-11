@@ -49,25 +49,6 @@ def browse():
 @app.route('/genres', methods=['GET', 'POST'])
 def genres():
     return browse_category('genres', request)
-    # if request.method == 'GET':
-    #     category=browse_categories['genres']
-    #     category['category']='genres'
-    #     return render_template('category.html', category=category, fields=fields)
-    
-    # selections = request.form.getlist('selectedOptions[]')
-    
-    # options = []
-    
-    # for selection in selections:
-    #     options.append({'genres':{"$regex": selection.lower()}})
-        
-    # search_q = {"$or": options}
-            
-    # response = requests.get(read_url, json=search_q)
-    # records_list = json.loads(response.content)
-    
-    # # render the records.html template and pass in the records list as a variable
-    # return render_template('records.html', records=clean_response(records_list), fields=fields)
 
 
 def browse_category(category, request):
