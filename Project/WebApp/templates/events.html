@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+            LibraryCatalog&trade; Events
+  </title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        /* Styling the librarycatalog intro bar*/
+        section .libcat {
+            width: 100%;
+            height: 100%;
+            float: left;
+            padding: 50px;
+            box-sizing: border-box;
+        }
+        /* Styling the background of
+            left floating section */
+        section .libcat .content {
+            color: #fff;
+            background-color: #fff;
+            padding: 40px;
+            transition: .5s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+            text-align: center;
+        }
+        /* Styling the hover effect 
+            of left floating section */
+        /* Styling the header of left
+            floating section */
+        section .libcat .content h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 50px;
+            color: #6610f2;
+        }
+        /* Styling the paragraph of
+            left floating section */
+        section .libcat .content p {
+            margin: 10px 0 0;
+            padding: 0;
+            color:#000000
+        }
+        /* Styling the three events section */
+        /section .events {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            float: right;
+            box-sizing: border-box;
+        }
+        /* Styling the links of
+        the events section */
+        section .events ul {
+            position: absolute;
+            top: 50%;
+            margin: 0;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        /* Styling the lists of the event section */
+        section .events ul li {
+            list-style: none;
+            background: #fff;
+            box-sizing: border-box;
+            height: 200px;
+            margin: 15px 0;
+        }
+        /*Styling the dates of the events*/
+        section .events ul li .date {
+            position: relative;
+            padding: 20px;
+            background: #6610f2;
+            box-sizing: border-box;
+            width: 30%;
+            height: 100%;
+            float: left;
+            text-align: center;
+            transition: .5s;
+        }
+        /* Styling the header of time
+            class of events section */
+        section .events ul li .date h2 {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            top: 50%;
+            left: 50%;
+            color: #fff;
+            font-size: 60px;
+            line-height: 30px;
+        }
+        /* Styling the texts of time
+        class of events section */
+        section .events ul li .date h2 span {
+            font-size: 30px;
+        }
+ 
+        /* Styling the details
+        class of events section */
+        section .events ul li .details {
+            padding: 20px;
+            background: #fff;
+            box-sizing: border-box;
+            width: 70%;
+            height: 100%;
+            float: left;
+        }
+        /* Styling the header of the
+        details class of events section */
+        section .events ul li .details h3 {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-size: 22px;
+        }
+        /* Styling the lists of details
+        class of events section */
+        section .events ul li .details p {
+            position: relative;
+            margin: 10px 0 0;
+            padding: 0;
+            font-size: 16px;
+        }
+        /* Styling the links of details
+        class of events section */
+        section .events ul li .details a {
+            display: block;
+            padding: 10px 20px;
+            background-color: #6610f2;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease-out;
+        }
+        
+        /* Styling the details class's hover effect */
+        section .events ul li .details a:hover {
+            background: #4c0598;
+            color: #fff;
+            border-color: #4c0598;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="libcat">
+            <div class="content">
+                <h1>
+                    LibraryCatalog&trade; Events
+                </h1>
+                <p>
+                    Welcome to the events page of our library catalog! Our library is a vibrant and 
+                    dynamic community hub that offers a wide variety of events and programs for people 
+                    of all ages! From book clubs, author talks, tea sessions, and children's storytimes, 
+                    we would love to have you at our weekly library events! We keep a regular record of 
+                    our upcoming events on this page, feel free to browse through them! We would love to 
+                    see you here!
+                </p>
+                <ul>
+                    <li><a href="{{ url_for('search') }}">Search</a></li>
+			        <li><a href="{{ url_for('records') }}">Browse All Books</a></li>
+                    <li><a href="{{ url_for('browse') }}">Browse By Category</a></li>
+			        <li><a href="{{ url_for('events') }}">Browse Events</a></li>
+                    <li><a href="{{ url_for('index') }}">Log Out</a></li>
+                    <!-- Add more links here as needed -->
+        
+                    
+                    
+            
+                </ul>
+            </div>
+        </div>
+        <div class="events">
+            <ul>
+                <li>
+                    <div class="date">
+                        <h2>
+                            20 <br><span>May</span>
+                        </h2>
+                    </div>
+                    <div class="details">
+                        <h3>
+                            Irving Book Signing
+                        </h3>
+                        <p>
+                            Join us for an evening with bestselling author John Irving, who will read 
+                            from their latest novel, The Last Chairlift and answer audience questions. 
+                            After the reading, Irving will sign copies of their book, which will be 
+                            available for purchase.
+                        </p>
+                        <br><br>
+                        <a href="booksigning.html">View Details!</a>
+                    </div>
+                    <div style="clear: both;"></div>
+                </li>
+                <li>
+                    <div class="date">
+                        <h2>
+                            27 <br><span>May</span>
+                        </h2>
+                    </div>
+                    <div class="details">
+                        <h3>
+                            Bruno Writing Workshop
+                        </h3>
+                        <p>
+                            Are you interested in improving your writing skills? Join us for a writing 
+                            workshop led by acclaimed author Michael Bruno. Bruno will provide tips and 
+                            guidance on writing techniques, and participants will have the opportunity 
+                            to share their work and receive feedback.
+                        </p>
+                        <br><br>
+                        <a href="writingworkshop.html">View Details!</a>
+                    </div>
+                    <!--<div style="clear:both;"></div>-->
+                </li>
+                <li>
+                    <div class="date">
+                        <h2>
+                            17 <br><span>June</span>
+                        </h2>
+                    </div>
+                    <div class="details">
+                        <h3>
+                            Graphic Novel Discussion and Signing
+                        </h3>
+                        <p>
+                            Are you a fan of graphic novels? Join us for a discussion with Will Eisner, 
+                            the creator of the popular A Contract With God series. Eisner will talk 
+                            about his creative process, answer questions, and sign copies of his books. 
+                            This event is perfect for fans of graphic novels, comic books, and pop culture.
+                        </p>
+                        <br><br>
+                        <a href="graphicnovelsigning.html">View Details!</a>
+                    </div>
+                    <div style="clear:both;"></div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

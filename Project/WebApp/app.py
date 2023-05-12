@@ -223,6 +223,10 @@ def delete():
             return render_template('form.html', fields=fields, error=error_msg)
     return render_template('form.html', fields=fields)
 
+@app.route('/events')
+def events():
+    return render_template('events.html')
+
 def main():
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
