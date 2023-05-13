@@ -17,6 +17,9 @@ _Lab Reports & Presentation:_
 
 ___________________________________
 
+**Deployed Web App:**
+[https://webservice1234567.azurewebsites.net/](https://webservice1234567.azurewebsites.net/)
+
 **Create Record** Azure Function:
 [dataservice1234.azurewebsites.net/api/CreateRecord](https://dataservice12345.azurewebsites.net/api/CreateRecord)
 
