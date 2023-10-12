@@ -44,7 +44,7 @@ def public_home():
 
 @app.route('/admin_events', methods=['GET', 'POST', 'PUT'])
 def admin_events():
-    fields['html']['title'] = 'Admin Home'
+    fields['html']['title'] = 'Admin Events'
     if fields['admin']:
         return render_template('events.html', fields=eventvariables)
     
@@ -53,12 +53,9 @@ def admin_events():
 
 @app.route('/public_events')
 def public_events():
-    fields['html']['title'] = 'Home'
+    fields['html']['title'] = 'Events'
     fields['admin'] = False
     return render_template('events.html', fields=eventvariables)
-
-
-
 
 
 @app.route('/browse')
@@ -280,6 +277,13 @@ def deleteevent():
             error_msg = f"Error: {response.status_code} - {response.reason}"
             return render_template('form.html', fields=eventvariables, error=error_msg)
     return render_template('form.html', fields=eventvariables)
+
+@app.route('/eventsdisplay', methods=['GET', 'POST'])  # create a new route for /records endpoint
+def eventsdisplay():
+    fields['html']['title'] = 'Library Catalog'
+    response = requests.get(read_url, params=search_query)
+    events_list = json.loads(response.content)
+    return render_template('eventsdisplay.html', events=clean_response(events_list), fields=eventvariables)
 
 def main():
     port = int(os.environ.get('PORT', 5000))
