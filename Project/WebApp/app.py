@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from fields import fields, browse_categories
+from fields import fields, browse_categories, eventvariables
 import requests
 import json
 import os
@@ -226,6 +226,41 @@ def delete():
 @app.route('/events')
 def events():
     return render_template('events.html')
+
+@app.route('/createevent', methods=['GET', 'POST'])
+def createevent():
+    fields['html']['title'] = 'Create Event'
+    fields['html']['method'] = 'POST'
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        data = json.dumps(data)
+        response = requests.post(create_url, headers=headers, data=data)
+        if response.status_code == 200:
+            return redirect(url_for('events'))
+        else:
+            error_msg = f"Error: {response.status_code} - {response.reason}"
+            return render_template('form.html', fields=eventvariables, error=error_msg)
+    return render_template('form.html', fields=eventvariables)
+
+@app.route('/deletevent', methods=['GET', 'DELETE', 'POST'])
+def deleteevent():
+    fields['html']['title'] = 'Delete Event'
+    fields['html']['method'] = 'DELETE'
+    print(request.method)
+    if request.method == 'POST' and request.form.get('_method') == 'DELETE':
+        data = request.form.to_dict()
+        search_q = {}
+        for k, v in data.items():
+            if v != '' and k != '_method':
+                search_q[k] = {"$regex": v.lower()}
+        data = json.dumps(data)
+        response = requests.delete(delete_url, json=search_q)
+        if response.status_code == 200:
+            return redirect(url_for('events'))
+        else:
+            error_msg = f"Error: {response.status_code} - {response.reason}"
+            return render_template('form.html', fields=eventvariables, error=error_msg)
+    return render_template('form.html', fields=eventvariables)
 
 def main():
     port = int(os.environ.get('PORT', 5000))

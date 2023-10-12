@@ -203,6 +203,44 @@ browse_categories = {
     }
 }
 
+eventvariables = {
+    'eventname': {
+        'display': 'Event Name',
+        'type': 'string',
+        'max': 45,
+        'case': 'title'
+    },
+
+    'eventcatchphrase': {
+        'display': 'Event Name',
+        'type': 'string',
+        'max': 45,
+        'case': 'title'
+    },
+
+    'eventtime': {
+        'display': 'Event Time',
+        'type': 'time',
+        'max': 45,
+        'case': 'lower'
+    },
+
+
+    'eventdate': {
+        'display': 'Event Date',
+        'type': 'date',
+        'max': 45,
+        'case': 'lower'
+    },
+
+    'eventdescription':{
+        'display': 'Event Description',
+        'type': 'string',
+        'max': 45,
+        'case': 'lower'
+    }
+}
+
 
 
 
