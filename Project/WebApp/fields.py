@@ -212,7 +212,7 @@ eventvariables = {
     },
 
     'eventcatchphrase': {
-        'display': 'Event Name',
+        'display': 'Event Catchphrase',
         'type': 'string',
         'max': 45,
         'case': 'title'
