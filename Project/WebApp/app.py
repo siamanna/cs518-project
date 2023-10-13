@@ -239,9 +239,13 @@ def delete():
             return render_template('form.html', fields=fields, error=error_msg)
     return render_template('form.html', fields=fields)
 
-@app.route('/events')
-def events():
-    return render_template('events.html')
+# @app.route('/events')
+# def events():
+#     #  fields['html']['title'] = 'Library Events'
+#     #  if fields['admin']:
+#     #      return render_template('events.html')
+    
+#      return render_template('events.html')
 
 @app.route('/createevent', methods=['GET', 'POST'])
 def createevent():
