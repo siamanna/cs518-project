@@ -35,21 +35,25 @@ def admin_home():
     fields['admin'] = True
     return render_template('login.html', fields=fields)
 
-@app.route('/public_home')
+@app.route('/public_home/')
 def public_home():
     fields['html']['title'] = 'Home'
     fields['admin'] = False
     return render_template('home.html', fields=fields)
 
 
-@app.route('/admin_events', methods=['GET', 'POST', 'PUT'])
+@app.route('/admin_events/', methods=['GET', 'POST', 'PUT'])
 def admin_events():
     fields['html']['title'] = 'Admin Events'
-    if fields['admin']:
+    fields_variable = fields
+    fields_variable['admin'] = True
+    print(fields['admin'])
+    print(fields_variable['admin'])
+    if fields_variable['admin']:
         return render_template('events.html', fields=eventvariables)
     
-    fields['admin'] = True
-    return render_template('login.html', fields=eventvariables)
+    #fields['admin'] = True
+    #return render_template('login.html', fields=eventvariables)
 
 @app.route('/public_events')
 def public_events():

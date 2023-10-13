@@ -204,6 +204,12 @@ browse_categories = {
 }
 
 eventvariables = {
+    'admin': False,
+    'html': {
+        'title': '',
+        'method': 'POST'
+    },
+
     'eventname': {
         'display': 'Event Name',
         'type': 'string',

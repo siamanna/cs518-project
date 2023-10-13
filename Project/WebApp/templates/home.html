@@ -61,10 +61,11 @@
             <li><a href="{{ url_for('search') }}">Search</a></li>
 			<li><a href="{{ url_for('records') }}">Browse All Books</a></li>
             <li><a href="{{ url_for('browse') }}">Browse By Category</a></li>
-			<li><a href="{{ url_for('events') }}">Events</a></li>
+			<li><a href="{{ url_for('public_events') }}">Events</a></li>
 			<!-- Add more links here as needed -->
 
             {% if fields['admin'] %}
+				<li><a href="{{ url_for('admin_events') }}">Admin Events</a></li>
                 <li><a href="{{ url_for('create') }}">Create Record</a></li>
                 <li><a href="{{ url_for('delete') }}">Delete Record</a></li>
             {% endif %}
