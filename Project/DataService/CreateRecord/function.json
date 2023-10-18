@@ -1,24 +1,20 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "Attach to Python Functions",
-            "type": "python",
-            "request": "attach",
-            "port": 9091,
-            "preLaunchTask": "func: host start",
-            "hostName": "localhost",
-            "debugOptions": [
-                "RedirectOutput"
-            ]
-        }
-    ]
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    }
+  ]
 }

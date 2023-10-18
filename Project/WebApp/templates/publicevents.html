@@ -58,18 +58,8 @@
 	<div class="container">
 		<h1>LibraryCatalog&trade; Events</h1>
 		<ul>
-
-		
 			<li><a href="{{ url_for('public_home') }}">Home</a></li>
-			
-			
 			<!-- Add more links here as needed -->
-
-			{% if eventvariables['admin'] == True %}
-				<li><a href="{{ url_for('admin_home') }}">Admin Home</a></li>
-				<li><a href="{{ url_for('createevent') }}">Create Events</a></li>
-				<li><a href="{{ url_for('deleteevent') }}">Delete Events</a></li>
-			{% endif %}
             <li><a href="{{ url_for('index') }}">Log Out</a></li>
 		</ul>
 

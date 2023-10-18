@@ -44,13 +44,13 @@ def public_home():
 
 @app.route('/admin_events/', methods=['GET', 'POST', 'PUT'])
 def admin_events():
-    fields['html']['title'] = 'Admin Events'
-    fields_variable = fields
-    fields_variable['admin'] = True
-    print(fields['admin'])
-    print(fields_variable['admin'])
-    if fields_variable['admin']:
-        return render_template('events.html', fields=eventvariables)
+    eventvariables['html']['title'] = 'Admin Events'
+    # fields_variable = fields
+    # fields_variable['admin'] = True
+    # print(fields['admin'])
+    # print(fields_variable['admin'])
+    if eventvariables['admin']:
+        return render_template('events.html', eventvariables=eventvariables)
     
     #fields['admin'] = True
     #return render_template('login.html', fields=eventvariables)
@@ -59,7 +59,7 @@ def admin_events():
 def public_events():
     fields['html']['title'] = 'Events'
     fields['admin'] = False
-    return render_template('events.html', fields=eventvariables)
+    return render_template('events.html', eventvariables=eventvariables)
 
 
 @app.route('/browse')

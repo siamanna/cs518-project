@@ -1,21 +1,29 @@
-import azure.functions as func
-import json
-from bson import json_util
 import logging
 import data_manager
 
-def parse_json(data):
-    return json.dumps(json.loads(json_util.dumps(data)))
+from bson import json_util
+
+import azure.functions as func
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-    try:
-        body = req.get_json()
-    except ValueError as e:
+
+    name = req.params.get('name')
+    if not name:
         try:
-            body = req.params
-        except ValueError as e:
-            body = {}
-    result = data_manager.create(body)
-    return func.HttpResponse(body=parse_json(result), status_code=200)
+            data_manager.initialize()
+            req_body = req.get_json()
+            name = data_manager.create(req_body)
+        except ValueError:
+            pass
+        else:
+            name = req_body.get('name')
+
+    if name:
+        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
+    else:
+        return func.HttpResponse(
+             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+             status_code=200
+        )
