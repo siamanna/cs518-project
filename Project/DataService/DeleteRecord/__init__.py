@@ -1,11 +1,11 @@
 import azure.functions as func
 import json
-from bson import json_util
+#from bson import json_util
 import logging
 import data_manager
 
 def parse_json(data):
-    return json.dumps(json.loads(json_util.dumps(data)))
+    return json.dumps(json.loads(json.dumps(data)))
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:

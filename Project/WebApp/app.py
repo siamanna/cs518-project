@@ -1,14 +1,16 @@
 from flask import Flask, render_template, redirect, url_for, request
 from fields import fields, browse_categories, eventvariables
 import requests
+from bson import json_util
+import subprocess as sp
 import json
 import os
 import re
 
 
-create_url = "https://dataservice12345.azurewebsites.net/api/CreateRecord"
-read_url = "https://dataservice12345.azurewebsites.net/api/ReadRecord"
-delete_url = "https://dataservice12345.azurewebsites.net/api/DeleteRecord"
+create_url = "http://localhost:7071/api/CreateRecords"
+read_url = "http://localhost:7071/api/ReadRecords"
+delete_url = "http://localhost:7071/api/DeleteRecord"
 search_query = {}
 
 
@@ -52,8 +54,8 @@ def admin_events():
     if eventvariables['admin']:
         return render_template('events.html', eventvariables=eventvariables)
     
-    #fields['admin'] = True
-    #return render_template('login.html', fields=eventvariables)
+    fields['admin'] = True
+    return render_template('events.html', eventvariables=eventvariables)
 
 @app.route('/public_events')
 def public_events():
@@ -243,23 +245,35 @@ def delete():
             return render_template('form.html', fields=fields, error=error_msg)
     return render_template('form.html', fields=fields)
 
-# @app.route('/events')
-# def events():
-#     #  fields['html']['title'] = 'Library Events'
-#     #  if fields['admin']:
-#     #      return render_template('events.html')
-    
-#      return render_template('events.html')
+@app.route('/events', methods=['GET', 'DELETE', 'POST'])
+def events():
+    fields['html']['title'] = 'Library Events'
+    if fields['admin']:
+        response = requests.get(read_url)
+
+        return render_template('events.html', events=json_util.loads(response.text))
+
+    return render_template('events.html', events=json_util.loads(response.text))
 
 @app.route('/createevent', methods=['GET', 'POST'])
 def createevent():
     fields['html']['title'] = 'Create Event'
     fields['html']['method'] = 'POST'
     if request.method == 'POST':
-        data = request.form.to_dict()
-        data = json.dumps(data)
-        response = requests.post(create_url, headers=headers, data=data)
+        #Hannah code
+        #data = request.form.to_dict()
+        #data = json.dumps(data)
+        #response = requests.post(create_url, headers=headers, data=data)
+        #Hannah code
+        eventname = request.form['eventname']
+        eventcatchphrase = request.form["eventcatchphrase"]
+        eventtime = request.form["eventtime"]
+        eventdate = request.form["eventdate"]
+        eventdescription = request.form["eventdescription"]
+        #response = requests.post(create_url, json=eventvariables)
+        response = requests.post(create_url, json={'eventname': eventname, 'eventcatchphrase': eventcatchphrase, 'eventtime': eventtime, 'eventdate': eventdate, 'eventdescription': eventdescription})
         if response.status_code == 200:
+            #response = requests.post(create_url, json={'eventname': eventname, 'eventcatchphrase': eventcatchphrase, 'eventtime': eventtime, 'eventdate': eventdate, 'eventdescription': eventdescription})
             return redirect(url_for('events'))
         else:
             error_msg = f"Error: {response.status_code} - {response.reason}"
@@ -286,12 +300,12 @@ def deleteevent():
             return render_template('form.html', fields=eventvariables, error=error_msg)
     return render_template('form.html', fields=eventvariables)
 
-@app.route('/eventsdisplay', methods=['GET', 'POST'])  # create a new route for /records endpoint
-def eventsdisplay():
-    fields['html']['title'] = 'Library Catalog'
-    response = requests.get(read_url, params=search_query)
-    events_list = json.loads(response.content)
-    return render_template('eventsdisplay.html', events=clean_response(events_list), fields=eventvariables)
+#@app.route('/eventsdisplay', methods=['GET', 'POST'])  # create a new route for /records endpoint
+#def eventsdisplay():
+#    fields['html']['title'] = 'Library Catalog'
+#    response = requests.get(read_url, params=search_query)
+#    events_list = json.loads(response.content)
+#    return render_template('eventsdisplay.html', events=clean_response(events_list), fields=eventvariables)
 
 def main():
     port = int(os.environ.get('PORT', 5000))
