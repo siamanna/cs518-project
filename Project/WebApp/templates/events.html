@@ -60,15 +60,18 @@
 		<ul>
 
 		
-			<li><a href="{{ url_for('public_home') }}">Home</a></li>
+			<li><a href="{{ url_for('public_home') }}">Public Home</a></li>
 			
 			
 			<!-- Add more links here as needed -->
 
 			
-			<li><a href="{{ url_for('admin_home') }}">Admin Home</a></li>
-			<li><a href="{{ url_for('createevent') }}">Create Events</a></li>
-			<li><a href="{{ url_for('deleteevent') }}">Delete Events</a></li>
+			
+			{% if eventvariables['admin'] != False %}
+				<li><a href="{{ url_for('admin_home') }}">Admin Home</a></li>
+				<li><a href="{{ url_for('createevent') }}">Create Events</a></li>
+				<li><a href="{{ url_for('deleteevent') }}">Delete Events</a></li>
+			{% endif %}
 		
             <li><a href="{{ url_for('index') }}">Log Out</a></li>
 		</ul>
@@ -78,11 +81,11 @@
 
 		{% if events|length > 0 %}
 			{% for event in events %}
-				<h3>{{ event.name }}</h3>
-				<p>{{ event.date }}</p>
-				<p>{{ event.time }}</p>
-				<p>{{ event.catchphrase }}</p>
-				<p>{{ event.description }}</p>
+				<h3>{{ event.eventname }}</h3>
+				<p>{{ event.eventdate }}</p>
+				<p>{{ event.eventtime }}</p>
+				<p>{{ event.eventcatchphrase }}</p>
+				<p>{{ event.eventdescription }}</p>
 				<hr>
 			{% endfor %}
 		{% else %}

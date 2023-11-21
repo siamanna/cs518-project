@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        margin: 0 auto;
+        width: 300px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Admin Events Login</h1>
+    <form onsubmit="return validateForm()" method="post" action="{{ url_for('admin_events') }}">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password"><br>
+      <input type="submit" value="Login">
+    </form>
+    <script>
+      function validateForm() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if (username !== 'Admin' || password !== 'admin') {
+          alert('Invalid username or password');
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

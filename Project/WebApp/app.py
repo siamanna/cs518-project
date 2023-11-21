@@ -52,10 +52,11 @@ def admin_events():
     # print(fields['admin'])
     # print(fields_variable['admin'])
     if eventvariables['admin']:
+        #print(eventvariables['admin'])
         return render_template('events.html', eventvariables=eventvariables)
     
-    fields['admin'] = True
-    return render_template('events.html', eventvariables=eventvariables)
+    eventvariables['admin'] = True
+    return render_template('eventlogin.html', eventvariables=eventvariables)
 
 @app.route('/public_events')
 def public_events():
@@ -247,18 +248,18 @@ def delete():
 
 @app.route('/events', methods=['GET', 'DELETE', 'POST'])
 def events():
-    fields['html']['title'] = 'Library Events'
-    if fields['admin']:
+    eventvariables['html']['title'] = 'Library Events'
+    response = requests.get(read_url)
+    if eventvariables['admin'] == True:
         response = requests.get(read_url)
+        return render_template('events.html', events=json_util.loads(response.text), eventvariables=eventvariables)
 
-        return render_template('events.html', events=json_util.loads(response.text))
-
-    return render_template('events.html', events=json_util.loads(response.text))
+    return render_template('events.html', events=json_util.loads(response.text), eventvariables=eventvariables)
 
 @app.route('/createevent', methods=['GET', 'POST'])
 def createevent():
-    fields['html']['title'] = 'Create Event'
-    fields['html']['method'] = 'POST'
+    eventvariables['html']['title'] = 'Create Event'
+    eventvariables['html']['method'] = 'POST'
     if request.method == 'POST':
         #Hannah code
         #data = request.form.to_dict()
@@ -277,13 +278,13 @@ def createevent():
             return redirect(url_for('events'))
         else:
             error_msg = f"Error: {response.status_code} - {response.reason}"
-            return render_template('form.html', fields=eventvariables, error=error_msg)
-    return render_template('form.html', fields=eventvariables)
+            return render_template('eventsform.html', eventvariables=eventvariables, error=error_msg)
+    return render_template('eventsform.html', eventvariables=eventvariables)
 
 @app.route('/deletevent', methods=['GET', 'DELETE', 'POST'])
 def deleteevent():
-    fields['html']['title'] = 'Delete Event'
-    fields['html']['method'] = 'DELETE'
+    eventvariables['html']['title'] = 'Delete Event'
+    eventvariables['html']['method'] = 'DELETE'
     print(request.method)
     if request.method == 'POST' and request.form.get('_method') == 'DELETE':
         data = request.form.to_dict()
@@ -297,8 +298,8 @@ def deleteevent():
             return redirect(url_for('events'))
         else:
             error_msg = f"Error: {response.status_code} - {response.reason}"
-            return render_template('form.html', fields=eventvariables, error=error_msg)
-    return render_template('form.html', fields=eventvariables)
+            return render_template('eventsform.html', eventvariables=eventvariables, error=error_msg)
+    return render_template('eventsform.html', eventvariables=eventvariables)
 
 #@app.route('/eventsdisplay', methods=['GET', 'POST'])  # create a new route for /records endpoint
 #def eventsdisplay():
